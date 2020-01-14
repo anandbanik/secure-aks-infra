@@ -1,0 +1,18 @@
+CLUSTER_ID="RCNP-tstsplit1"
+COST_CENTER="8765"
+DEPLOY_TYPE="dev"
+ENVIRONMENT="dev-infosec"
+NOTIFY_LIST="it_ops@mycomp.com"
+OWNER_INFO="IT_OPS"
+PLATFORM="RCNP-K8S"
+SPONSOR_INFO="it_ops"
+REGION="southcentralUS"
+DOCKER_REGISTRY="myreg.azurecr.io"
+#Must create SP with Subscription Contributor Rights to run TF with
+TF_CLIENT_ID="17630115-e5f3-490f-804e-8168732258ed"
+TF_CLIENT_SECRET="gSAryqZCYg6U9r0LRfTuKjgvkBC02li3O5XKoDDolUE="
+TF_TENANT_ID="72f988bf-86f1-41af-91ab-2d7cd011db47"
+TF_SUB_ID="648dcb5a-de1e-48b2-af6b-fe6ef28d355c"
+#Must Create Log Anayltics workspace prior to deployment
+LOG_ANALYTICS_WORKSPACE_NAME="DefaultWorkspace-648dcb5a-de1e-48b2-af6b-fe6ef28d355c-SCUS"
+LOG_ANALYTICS_WORKSPACE_RG="DefaultResourceGroup-SCUS"
