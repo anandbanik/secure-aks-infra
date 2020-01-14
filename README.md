@@ -41,13 +41,13 @@ The following values can be used for a `terraform.tfvars`
 azfw tfvars
 
 ```hcl
-CLUSTER_ID="wcnp-tstsplit1"
+CLUSTER_ID="RCNP-tstsplit1"
 COST_CENTER="8765"
 DEPLOY_TYPE="dev"
 ENVIRONMENT="dev-infosec"
 NOTIFY_LIST="it_ops@mycomp.com"
 OWNER_INFO="IT_OPS"
-PLATFORM="WCNP-K8S"
+PLATFORM="RCNP-K8S"
 SPONSOR_INFO="it_ops"
 REGION="southcentralUS"
 DOCKER_REGISTRY="myreg.azurecr.io"
@@ -64,13 +64,13 @@ LOG_ANALYTICS_WORKSPACE_RG="<REGION_LOG_ANALYTICS_WORKSPACE_IS_LOCATED"
 aks tfvars
 
 ```hcl
-CLUSTER_ID="wcnp-tstsplit1"
+CLUSTER_ID="RCNP-tstsplit1"
 COST_CENTER="8765"
 DEPLOY_TYPE="dev"
 ENVIRONMENT="dev-infosec"
 NOTIFY_LIST="it_ops@mycomp.com"
 OWNER_INFO="IT_OPS"
-PLATFORM="WCNP-K8S"
+PLATFORM="RCNP-K8S"
 SPONSOR_INFO="it_ops"
 REGION="southcentralUS"
 AKS_SSH_ADMIN_KEY="ssh-rsa AAAAB3N.........n0BCv4j0U/gZVoAX8z user@local.local"
