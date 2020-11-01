@@ -31,37 +31,12 @@ variable "CLUSTER_ID" {
   
 }
 
-variable "COST_CENTER" {
-  description = "Cost center #"
-}
 
-variable "DEPLOY_TYPE" {
-  description = "Deployment type for tags"
-}
-
-variable "ENVIRONMENT" {
-  description = "Environment info"
-}
-
-variable "NOTIFY_LIST" {
-  description = "notification list"
-}
-
-variable "OWNER_INFO" {
-  
-}
-variable "PLATFORM" {
-  
-}
-
-variable "SPONSOR_INFO" {
-  
-}
 /*
  * VNET
  */
 variable "VNET_NAME" {
-  type = "string"
+  type = string
 }
 variable "VNET_ADDR_SPACE" {
   description = "The address space that is used by the virtual network."
@@ -89,28 +64,28 @@ variable "AKS_SSH_ADMIN_KEY" {
   description = "Admin SSH Public Key for AKS Agent VMs"
 }
 variable "K8S_VER" {
-  type = "string"
+  type = string
 }
 
 variable "ADMIN_USER" {
-  type = "string"
+  type = string
 }
 
 variable "POOL1_NODE_SIZE" {
-  type = "string"
+  type = string
 }
 variable "POOL2_NODE_SIZE" {
-  type = "string"
+  type = string
 }
 variable "SERVICE_CIDR" {
   default = "172.16.0.0/16"
   description ="Used to assign internal services in the AKS cluster an IP address. This IP address range should be an address space that isn't in use elsewhere in your network environment. This includes any on-premises network ranges if you connect, or plan to connect, your Azure virtual networks using Express Route or a Site-to-Site VPN connections."
-  type = "string"
+  type = string
 }
 variable "DNS_IP" {
   default = "172.16.0.10"
   description = "should be the .10 address of your service IP address range"
-  type = "string"
+  type = string
 }
 variable "DOCKER_CIDR" {
   default = "172.17.0.1/16"
@@ -135,45 +110,45 @@ variable "POD_CIDR" {
 # }
 
 variable "AUTH_IP_RANGES" {
-  type="string"
+  type=string
 }
 
 variable "ENABLE_CA_POOL1" {
-  type="string"
+  type=string
 }
 variable "ENABLE_CA_POOL2" {
-  type="string"
+  type=string
 }
 variable "POOL1_NAME" {
-  type="string"
+  type=string
 }
 
 variable "POOL1_MIN" {
-  type="string"
+  type=string
 }
 
 variable "POOL1_MAX" {
-  type="string"
+  type=string
 }
 
 variable "POOL2_NAME" {
-  type="string"
+  type=string
 }
 
 variable "POOL2_MIN" {
-  type="string"
+  type=string
 }
 
 variable "POOL2_MAX" {
-  type="string"
+  type=string
 }
 
 variable "K8S_SP_CLIENT_ID" {
-  type="string"
+  type=string
 }
 
 variable "K8S_SP_CLIENT_SECRET" {
-  type="string"
+  type=string
 }
 
 
@@ -182,9 +157,11 @@ variable "K8S_SP_CLIENT_SECRET" {
  * K8S
  */
 
+/*
 variable "DOCKER_REGISTRY" {
   type="string"
 }
+*/
 /*
  * Hub VNET INfo from Output of AZFW Terrafrom Module Deployment
  */

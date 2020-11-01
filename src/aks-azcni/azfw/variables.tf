@@ -28,38 +28,6 @@ variable "CLUSTER_ID" {
   
 }
 
-variable "COST_CENTER" {
-  description = "Cost center #"
-}
-
-variable "DEPLOY_TYPE" {
-  description = "Deployment type for tags"
-}
-
-variable "ENVIRONMENT" {
-  description = "Environment info"
-}
-
-variable "NOTIFY_LIST" {
-  description = "notification list"
-}
-
-variable "OWNER_INFO" {
-  
-}
-variable "PLATFORM" {
-  
-}
-
-variable "SPONSOR_INFO" {
-  
-}
-
-variable "DOCKER_REGISTRY" {
-  type="string"
-}
-
-
 variable "LOG_ANALYTICS_WORKSPACE_NAME" {
   
 }

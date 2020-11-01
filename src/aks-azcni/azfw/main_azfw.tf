@@ -1,72 +1,42 @@
 resource "azurerm_virtual_network" "hubvnet" {
   name                = "hubvnet"
   address_space       = ["${var.HUB_VNET_ADDR_SPACE}"]
-  location            = "${azurerm_resource_group.hubrg.location}"
-  resource_group_name = "${azurerm_resource_group.hubrg.name}"
-
-  tags = {
-    costcenter = "${var.COST_CENTER}"
-    deploymenttype = "${var.DEPLOY_TYPE}"
-    environmentinfo = "${var.ENVIRONMENT}"
-    notificationdistlist= "${var.NOTIFY_LIST}"
-    ownerinfo = "${var.OWNER_INFO}"
-    platform = "${var.PLATFORM}"
-    sponsorinfo = "${var.SPONSOR_INFO}"
-  }
+  location            = azurerm_resource_group.hubrg.location
+  resource_group_name = azurerm_resource_group.hubrg.name
 }
 
 resource "azurerm_subnet" "azfwsubnet" {
-  name                      = "${var.HUB_SUBNET_NAMES[count.index]}"
-  virtual_network_name      = "${azurerm_virtual_network.aksvnet.name}"
-  resource_group_name       = "${azurerm_resource_group.main.name}"
-  address_prefix            = "${var.HUB_SUBNET_PREFIXES[count.index]}"
-  count                     = "${length(var.HUB_SUBNET_NAMES)}"
+  name                      = var.HUB_SUBNET_NAMES[count.index]
+  virtual_network_name      = azurerm_virtual_network.hubvnet.name
+  resource_group_name       = azurerm_resource_group.hubrg.name
+  address_prefix            = var.HUB_SUBNET_PREFIXES[count.index]
+  count                     = length(var.HUB_SUBNET_NAMES)
 }
 
 resource "azurerm_public_ip" "azfwpip" {
   name                = "azfwpip"
-  location            = "${azurerm_resource_group.hubrg.location}"
-  resource_group_name = "${azurerm_resource_group.hubrg.name}"
+  location            =  azurerm_resource_group.hubrg.location
+  resource_group_name =  azurerm_resource_group.hubrg.name
   allocation_method   = "Static"
   sku                 = "Standard"
-
-  tags = {
-    costcenter = "${var.COST_CENTER}"
-    deploymenttype = "${var.DEPLOY_TYPE}"
-    environmentinfo = "${var.ENVIRONMENT}"
-    notificationdistlist= "${var.NOTIFY_LIST}"
-    ownerinfo = "${var.OWNER_INFO}"
-    platform = "${var.PLATFORM}"
-    sponsorinfo = "${var.SPONSOR_INFO}"
-  }
 }
 
 resource "azurerm_firewall" "hubazfw" {
   name                = "hubazfw"
-  location            = "${azurerm_resource_group.hubrg.location}"
-  resource_group_name = "${azurerm_resource_group.hubrg.name}"
-
-  tags = {
-    costcenter = "${var.COST_CENTER}"
-    deploymenttype = "${var.DEPLOY_TYPE}"
-    environmentinfo = "${var.ENVIRONMENT}"
-    notificationdistlist= "${var.NOTIFY_LIST}"
-    ownerinfo = "${var.OWNER_INFO}"
-    platform = "${var.PLATFORM}"
-    sponsorinfo = "${var.SPONSOR_INFO}"
-  }
+  location            = azurerm_resource_group.hubrg.location
+  resource_group_name = azurerm_resource_group.hubrg.name
 
   ip_configuration {
     name                          = "configuration"
-    subnet_id                     = "${azurerm_subnet.azfwsubnet.id}"
-    public_ip_address_id          = "${azurerm_public_ip.azfwpip.id}"
+    subnet_id                     = azurerm_subnet.azfwsubnet[0].id
+    public_ip_address_id          = azurerm_public_ip.azfwpip.id
   }
 }
 
 resource "azurerm_firewall_application_rule_collection" "appruleazfw" {
  name                = "AzureFirewallAppCollection"
- azure_firewall_name = "${azurerm_firewall.hubazfw.name}"
- resource_group_name = "${azurerm_resource_group.hubrg.name}"
+ azure_firewall_name = azurerm_firewall.hubazfw.name
+ resource_group_name = azurerm_resource_group.hubrg.name
  priority            = 100
  action              = "Allow"
  rule {
@@ -97,7 +67,7 @@ resource "azurerm_firewall_application_rule_collection" "appruleazfw" {
      "*",
    ]
    target_fqdns = [
-     "${var.DOCKER_REGISTRY}", #FQDN for Private registry
+     #"${var.DOCKER_REGISTRY}", #FQDN for Private registry
      "*.cloudflare.docker.com" #FQDN used by docker.io for CDN of images.
    ]
    protocol {
@@ -141,8 +111,8 @@ resource "azurerm_firewall_application_rule_collection" "appruleazfw" {
 }
 resource "azurerm_firewall_network_rule_collection" "netruleazfw-ports" {
  name                = "AzureFirewallNetCollection-ports"
- azure_firewall_name = "${azurerm_firewall.hubazfw.name}"
- resource_group_name = "${azurerm_resource_group.hubrg.name}"
+ azure_firewall_name =  azurerm_firewall.hubazfw.name
+ resource_group_name =  azurerm_resource_group.hubrg.name
  priority            = 200
  action              = "Allow"
  rule {

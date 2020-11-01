@@ -1,12 +1,12 @@
 resource "azurerm_firewall_network_rule_collection" "netruleazfw-temp" {
  name                = "AzureFirewallNetCollection-API-TEMP"
- azure_firewall_name = "${data.azurerm_firewall.hubfw.name}"
- resource_group_name = "${var.HUBFW_RG_NAME}"
+ azure_firewall_name = data.azurerm_firewall.hubfw.name
+ resource_group_name = var.HUBFW_RG_NAME
  priority            = 210
  action              = "Allow"
 
  depends_on = [
-    "azurerm_resource_group.main"
+    azurerm_resource_group.main
   ]
 
   rule {
